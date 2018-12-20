@@ -1,0 +1,7 @@
+bin/rails g model LabelProduct name:string
+bin/rails g model Category name:string
+bin/rails g model Brand name:string
+bin/rails g model Material name:string
+bin/rails g model Specification 
+bin/rails g model Assembly percent:integer
+bin/rails g model Item code_ref:string name_ref:string zone_filature:string zone_tissage:string zone_eutrophisation:string zone_production:string photo:text price:float
