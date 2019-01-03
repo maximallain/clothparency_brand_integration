@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/items' => 'pages#index'
+  get '/items/:id', to: 'pages#show'
 
   get 'test' => 'pages#test'
 
