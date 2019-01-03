@@ -5,15 +5,12 @@ class ItemsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      brands: [],
+      categories: []
     };
     //this.deleteItem = deleteItem;
   }
-
-  /*deleteHandler(i, e) {
-    e.preventDefault();
-    this.props.onDelete(this.props.items);
-  }*/
 
   /*deleteItem(id) {
     fetch("http://localhost:3000/api/v1/items/" + id, {
@@ -22,6 +19,12 @@ class ItemsList extends Component {
   }*/
 
   componentWillMount() {
+    fetch("http://localhost:3000/api/v1/brands")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ brands: data });
+      });
+
     fetch("http://localhost:3000/api/v1/items")
       .then(response => response.json())
       .then(data => {
@@ -31,13 +34,11 @@ class ItemsList extends Component {
           );
         });
         this.setState({ items: items });
-      }); /*.catch(error => {
-        console.error(error);
-      });*/
+      });
   }
 
   render() {
-    //console.log(this.deleteItem);
+    console.log(this.state.brands);
     return <ul>{this.state.items}</ul>;
   }
 }
