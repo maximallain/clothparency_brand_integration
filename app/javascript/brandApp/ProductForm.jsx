@@ -1,5 +1,19 @@
 import React, { Component } from "react";
 
+function getItemsFromApiAsync() {
+  return fetch("http://localhost:3000/api/v1/items")
+    .then(response => response.json())
+    .then(responseJson => {
+      console.log(responseJson);
+      return responseJson;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
+const items = getItemsFromApiAsync();
+
 const MaterialItem = ({ number, value, handleInputChange }) => (
   <label>
     Matériau {number} :
