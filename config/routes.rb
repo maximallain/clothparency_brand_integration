@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :categories, only: [ :index, :show, :create, :update, :destroy]
       resources :brands, only: [ :index, :show, :create, :update, :destroy]
       resources :materials, only: [ :index, :show, :create, :update, :destroy]
-      resources :labelproducts, only: [ :index, :show, :create, :update, :destroy]
+      resources :label_products, only: [ :index, :show, :create, :update, :destroy]
       resources :items, only: [ :index, :show, :create, :update, :destroy]
       resources :assemblies, only: [ :index, :show, :create, :update, :destroy]
       resources :specifications, only: [ :index, :show, :create, :update, :destroy]
