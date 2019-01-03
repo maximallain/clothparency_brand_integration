@@ -1,2 +1,2 @@
 # app/views/api/v1/items/show.json.jbuilder
-json.extract! @item, :id, :name_ref
+json.extract! @item, :id, :code_ref, :name_ref, :zone_filature, :zone_tissage, :zone_eutrophisation, :zone_production, :photo, :price, :created_at, :updated_at, :brand_id, :category_id
