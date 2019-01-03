@@ -6,21 +6,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import ProductForm from "./ProductForm";
-import ItemsShow from "./ItemsShow";
+import ItemsList from "./ItemsList";
 
-/*
-Hello.defaultProps = {
-  name: "David"
-};
-
-Hello.propTypes = {
-  name: PropTypes.string
-};
-
-*/
-
-const App = props => <ItemsShow />;
+const App = props => <ItemsList />;
 
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<App />, document.querySelector("#root"));
 });
+
