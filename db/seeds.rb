@@ -33,6 +33,12 @@ LabelProduct.create(name:"Commerce Equitable")
 # Items
 Item.create(code_ref:"1111", name_ref:"Jean Bleu", category_id:1, brand_id:1, price:50, 
 zone_filature:"Vietnam")
+Item.create(code_ref:"1112", name_ref:"Jean Rouge", category_id:1, brand_id:1, price:50, 
+zone_filature:"Vietnam")
+Item.create(code_ref:"1113", name_ref:"Jean Jaune", category_id:1, brand_id:1, price:50, 
+zone_filature:"Vietnam")
+Item.create(code_ref:"1114", name_ref:"Jean Vert", category_id:1, brand_id:1, price:50, 
+zone_filature:"Vietnam")
 
 # Assembly
 Assembly.create(material_id:1, item_id:1, percent:100)

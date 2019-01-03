@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Item from "./Item";
-//import { deleteItem } from "../../actions/itemActions";
 
 class ItemsList extends Component {
   constructor(props) {
@@ -16,12 +15,11 @@ class ItemsList extends Component {
     this.props.onDelete(this.props.items);
   }*/
 
-  deleteItem(id) {
+  /*deleteItem(id) {
     fetch("http://localhost:3000/api/v1/items/" + id, {
       method: "DELETE"
     });
-    this.setState {}
-  }
+  }*/
 
   componentWillMount() {
     fetch("http://localhost:3000/api/v1/items")
@@ -29,11 +27,7 @@ class ItemsList extends Component {
       .then(data => {
         let items = data.map(item => {
           return (
-            <Item
-              key={item.id}
-              item={item}
-              deleteItem={this.deleteItem}
-            />
+            <Item key={item.id} item={item} deleteItem={this.deleteItem} />
           );
         });
         this.setState({ items: items });
