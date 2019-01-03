@@ -7,3 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Item.create(code_ref:"1111", name_ref:"Jean Bleu")
+Item.create(code_ref:"1111", name_ref:"Jean Rouge")
+Item.create(code_ref:"1111", name_ref:"Jean Jaune")
+Item.create(code_ref:"1111", name_ref:"Jean Vert")
