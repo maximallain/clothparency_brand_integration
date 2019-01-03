@@ -1,6 +1,6 @@
 # app/controllers/api/v1/brands_controller.rb
 class Api::V1::BrandsController < Api::V1::BaseController
-    before_action :set_item, only: [ :show, :update, :destroy]
+    before_action :set_brand, only: [ :show, :update, :destroy]
     def index
         # @items = policy_scope(Brand)
         @brands = Brand.all
@@ -12,7 +12,7 @@ class Api::V1::BrandsController < Api::V1::BaseController
 
     # private
 
-    def set_item
+    def set_brand
         @brand = Brand.find(params[:id])
         # authorize @restaurant # For Pundit
     end
