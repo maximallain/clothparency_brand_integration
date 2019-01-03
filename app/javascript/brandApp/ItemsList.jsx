@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Item from "./Item";
+//import { deleteItem } from "../../actions/itemActions";
 
 class ItemsList extends Component {
   constructor(props) {
@@ -7,15 +8,33 @@ class ItemsList extends Component {
     this.state = {
       items: []
     };
+    //this.deleteItem = deleteItem;
   }
 
+  /*deleteHandler(i, e) {
+    e.preventDefault();
+    this.props.onDelete(this.props.items);
+  }*/
+
+  deleteItem(id) {
+    fetch("http://localhost:3000/api/v1/items/" + id, {
+      method: "DELETE"
+    });
+    this.setState {}
+  }
 
   componentWillMount() {
     fetch("http://localhost:3000/api/v1/items")
       .then(response => response.json())
       .then(data => {
         let items = data.map(item => {
-          return <Item key={item.id} item={item} />;
+          return (
+            <Item
+              key={item.id}
+              item={item}
+              deleteItem={this.deleteItem}
+            />
+          );
         });
         this.setState({ items: items });
       }); /*.catch(error => {
@@ -24,6 +43,7 @@ class ItemsList extends Component {
   }
 
   render() {
+    //console.log(this.deleteItem);
     return <ul>{this.state.items}</ul>;
   }
 }

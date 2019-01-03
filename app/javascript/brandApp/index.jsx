@@ -5,7 +5,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import ProductForm from "./ProductForm";
+//import ProductForm from "./ProductForm";
 import ItemsList from "./ItemsList";
 
 const App = props => <ItemsList />;
