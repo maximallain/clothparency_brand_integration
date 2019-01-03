@@ -1,6 +1,6 @@
 # app/controllers/api/v1/categories_controller.rb
 class Api::V1::CategoriesController < Api::V1::BaseController
-    before_action :set_item, only: [ :show, :update, :destroy]
+    before_action :set_category, only: [ :show, :update, :destroy]
     def index
         # @items = policy_scope(Category)
         @categories = Category.all
@@ -12,7 +12,7 @@ class Api::V1::CategoriesController < Api::V1::BaseController
 
     # private
 
-    def set_item
+    def set_category
         @category = Category.find(params[:id])
         # authorize @restaurant # For Pundit
     end
