@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'db/index'
   get 'db' => 'db#index'
-  root to: 'pages#home'
+  root to: 'pages#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
