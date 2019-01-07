@@ -1,33 +1,26 @@
 import React, { Component } from "react";
 
 class Item extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      item: props.item,
-      showDetails: false
-    };
+  state = {
+    item: this.props.item,
+    showDetails: false
+  };
 
-    this.onClick = this.onClick.bind(this);
-  }
+  getBrandName = id => {
+    let name = "NO NAME";
+    this.props.brands.map(
+      brand => brand.id === this.state.item.brand_id && (name = brand.name)
+    );
+    return name;
+  };
 
-  onClick() {
+  onClick = () => {
     if (this.state.showDetails) {
       this.setState({ showDetails: false });
     } else {
       this.setState({ showDetails: true });
     }
-  }
-
-  /*deleteItem() {
-    fetch("/api/v1/items/" + this.state.item.id, "DELETE")
-      .then(response => {
-        return response.json();
-      })
-      .then(result => {
-        console.log(result);
-      });
-  }*/
+  };
 
   render() {
     return (
@@ -62,7 +55,7 @@ class Item extends Component {
               Production zone : {this.state.item.zone_production}
             </div>
             <div className="zone_filature">
-              Brand id : {this.state.item.brand_id}
+              Brand id : {this.getBrandName(this.state.item.brand_id)}
             </div>
           </div>
         ) : null}
