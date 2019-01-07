@@ -25,7 +25,7 @@ class ProductForm extends Component {
     zone_production: -1,
     zone_tissage: -1,
     materials: {},
-    brand_id : -1,
+    brand_id: this.props.brands[0].id,
     price: -1
   };
 
@@ -82,7 +82,8 @@ class ProductForm extends Component {
       zone_tissage,
       zone_eutrophisation,
       zone_production,
-      brand, price
+      brand,
+      price
     } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
@@ -92,6 +93,7 @@ class ProductForm extends Component {
             name="code_ref"
             value={code_ref}
             onChange={this.handleInputChange}
+            className="form-control"
           />
         </label>
         <br />
@@ -120,10 +122,14 @@ class ProductForm extends Component {
         <br />
         <label>
           Marque :
-          <select name="brand" value={brand} onChange={this.handleBrandChange}>
+          <select name="brand" value={brand} onChange={this.s}>
             {brands &&
               brands.map(brand => {
-                return <option value={brand.id}>{brand.name}</option>;
+                return (
+                  <option key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </option>
+                );
               })}
           </select>
         </label>
@@ -206,7 +212,7 @@ class ProductForm extends Component {
           </select>
         </label>
         <br />
-        <input type="submit" value="Submit" />
+        <input className="btn btn-primary" type="submit" value="Submit" />
       </form>
     );
   }
