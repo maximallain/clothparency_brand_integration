@@ -9,7 +9,6 @@ class Item extends Component {
     };
 
     this.onClick = this.onClick.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
   }
 
   onClick() {
@@ -20,7 +19,7 @@ class Item extends Component {
     }
   }
 
-  deleteItem() {
+  /*deleteItem() {
     fetch("/api/v1/items/" + this.state.item.id, "DELETE")
       .then(response => {
         return response.json();
@@ -28,17 +27,19 @@ class Item extends Component {
       .then(result => {
         console.log(result);
       });
-  }
+  }*/
 
   render() {
-    console.log(this.deleteItem);
     return (
       <div className="item">
         <h2>{this.state.item.name_ref}</h2>
         <button className="showDetails" onClick={this.onClick}>
           Show Details
         </button>
-        <button className="delete-btn" onClick={this.deleteItem()}>
+        <button
+          className="delete-btn"
+          onClick={() => this.props.deleteItem(this.state.item.id)}
+        >
           Delete
         </button>
         {this.state.showDetails ? (

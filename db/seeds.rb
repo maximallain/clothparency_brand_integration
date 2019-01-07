@@ -39,6 +39,13 @@ Item.create(code_ref:"1113", name_ref:"Jean Jaune", category_id:1, brand_id:1, p
 zone_filature:"Vietnam")
 Item.create(code_ref:"1114", name_ref:"Jean Vert", category_id:1, brand_id:1, price:50, 
 zone_filature:"Vietnam")
+Item.create(code_ref:"1115", name_ref:"Jean Mauve", category_id:1, brand_id:1, price:50, 
+zone_filature:"Vietnam")
+Item.create(code_ref:"1116", name_ref:"Jean Orange", category_id:1, brand_id:1, price:50, 
+zone_filature:"Vietnam")
+Item.create(code_ref:"1117", name_ref:"Jean Rose", category_id:1, brand_id:1, price:50, 
+zone_filature:"Vietnam")
+
 
 # Assembly
 Assembly.create(material_id:1, item_id:1, percent:100)

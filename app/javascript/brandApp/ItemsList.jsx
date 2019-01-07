@@ -9,14 +9,18 @@ class ItemsList extends Component {
       brands: [],
       categories: []
     };
-    //this.deleteItem = deleteItem;
   }
 
-  /*deleteItem(id) {
+  deleteItem = id => {
     fetch("http://localhost:3000/api/v1/items/" + id, {
       method: "DELETE"
+    }).then(response => {
+      console.log(this);
+      this.setState(state => {
+        return { items: state.items.filter(item => item.id !== id) };
+      });
     });
-  }*/
+  };
 
   componentWillMount() {
     fetch("http://localhost:3000/api/v1/brands")
@@ -28,19 +32,20 @@ class ItemsList extends Component {
     fetch("http://localhost:3000/api/v1/items")
       .then(response => response.json())
       .then(data => {
-        let items = data.map(item => {
-          return (
-            <Item key={item.id} item={item} deleteItem={this.deleteItem} />
-          );
-        });
-        this.setState({ items: items });
+        console.log(data);
+        this.setState({ items: data });
       });
   }
 
   render() {
-    console.log(this.state.brands);
-    return <ul>{this.state.items}</ul>;
+    console.log(this.state);
+    return (
+      <div>
+        {this.state.items.map(item => (
+          <Item key={item.id} item={item} deleteItem={this.deleteItem} />
+        ))}
+      </div>
+    );
   }
 }
-
 export default ItemsList;
