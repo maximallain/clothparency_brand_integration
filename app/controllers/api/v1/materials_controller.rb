@@ -18,7 +18,7 @@ class Api::V1::MaterialsController < Api::V1::BaseController
     end
 
     def material_params
-        params.require(:name)
+        params.require(:material).permit(:name)
 
     end
 

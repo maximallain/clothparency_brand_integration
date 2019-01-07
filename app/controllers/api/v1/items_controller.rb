@@ -18,7 +18,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
     end
 
     def item_params
-        params.require(:code_ref, :name_ref, :brand_id, :category_id).permit(:zone_filature, :zone_tissage,:zone_eutrophisation, :zone_production, :price, :photo)
+        params.require(:item).permit(:code_ref, :name_ref, :brand_id, :category_id, :zone_filature, :zone_tissage,:zone_eutrophisation, :zone_production, :price, :photo)
 
     end
 
