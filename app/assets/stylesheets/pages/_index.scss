@@ -1,2 +1,23 @@
 // Import page-specific CSS files here.
 @import "home";
+.items-list {
+  padding-top: 60px;
+}
+// .modal-component{
+//     padding-top: 60px;
+
+// }
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  .modal-header{
+      justify-content: space-between;
+  }
+  .close{
+    justify-content: space-between;
+  }
+}
+
+
+

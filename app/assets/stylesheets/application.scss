@@ -13,3 +13,32 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+.navbar-wagon-brand {
+  position: fixed !important;
+  top: 00px !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 2;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 0 0 rgba(0, 0, 0, 0.03);
+  background: white;
+  transition: all 0.3s ease;
+  height: 70px;
+  padding: 0px 15px;
+  display: flex;
+  //align-items: left;
+  justify-content: flex-start;
+  padding-left: 20px;
+  align-items: center;
+  text-decoration: none !important;
+}
+.navbar-wagon-brand img {
+  height: 50px;
+}
+.navbar-wagon-brand p {
+  padding: 0;
+  margin: 0;
+  padding-left: 5px;
+  font-size: 22px;
+  color: #666666;
+}
