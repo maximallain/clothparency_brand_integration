@@ -1,19 +1,5 @@
 import React, { Component } from "react";
 
-function getItemsFromApiAsync() {
-  return fetch("http://localhost:3000/api/v1/items")
-    .then(response => response.json())
-    .then(responseJson => {
-      console.log(responseJson);
-      return responseJson;
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}
-
-const items = getItemsFromApiAsync();
-
 const MaterialItem = ({ number, value, handleInputChange }) => (
   <label>
     Matériau {number} :
@@ -30,24 +16,20 @@ const MaterialItem = ({ number, value, handleInputChange }) => (
 );
 
 class ProductForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      code_ref: "",
-      name_ref: "",
-      categorie: 1,
-      zone_filature: 1,
-      zone_eutrophisation: 1,
-      zone_production: 1,
-      zone_tissage: 1,
-      materials: {}
-    };
+  state = {
+    code_ref: "",
+    name_ref: "",
+    categorie: -1,
+    zone_filature: -1,
+    zone_eutrophisation: -1,
+    zone_production: -1,
+    zone_tissage: -1,
+    materials: {},
+    brand_id: this.props.brands[0].id,
+    price: -1
+  };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleInputChange(event) {
+  handleInputChange = event => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -61,23 +43,27 @@ class ProductForm extends Component {
         [name]: value
       });
     }
-  }
+  };
 
-  handleSubmit(event) {
-    console.log("code_ref :" + this.state.code_ref);
-    console.log("name_ref :" + this.state.name_ref);
-    console.log("categorie :" + this.state.categorie);
+  handleBrandChange = event => {
+    this.setState({
+      brand_id: event.target.value
+    });
+  };
 
-    console.log("zone_filature :" + this.state.zone_filature);
-    console.log("zone_eutrophisation :" + this.state.zone_eutrophisation);
-    console.log("zone_production :" + this.state.zone_production);
-    console.log("zone_tissage :" + this.state.zone_tissage);
-    console.log("materials :" + JSON.stringify(this.state.materials));
-    console.log("material1 :", this.state.material1);
-    console.log("state :", this.state);
-
+  handleSubmit = event => {
     event.preventDefault();
-  }
+    fetch("http://localhost:3000/api/v1/items/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+          .attributes.content.value
+      },
+      body: JSON.stringify({ item: this.state })
+    });
+  };
 
   renderMaterial(number) {
     var components = "";
@@ -87,14 +73,27 @@ class ProductForm extends Component {
   }
 
   render() {
+    const { brands } = this.props;
+    const {
+      code_ref,
+      name_ref,
+      categorie,
+      zone_filature,
+      zone_tissage,
+      zone_eutrophisation,
+      zone_production,
+      brand,
+      price
+    } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
           Code :
           <textarea
             name="code_ref"
-            value={this.state.code_ref}
+            value={code_ref}
             onChange={this.handleInputChange}
+            className="form-control"
           />
         </label>
         <br />
@@ -102,7 +101,7 @@ class ProductForm extends Component {
           Name :
           <textarea
             name="name_ref"
-            value={this.state.name_ref}
+            value={name_ref}
             onChange={this.handleInputChange}
           />
         </label>
@@ -111,7 +110,7 @@ class ProductForm extends Component {
           Catégorie :
           <select
             name="categorie"
-            value={this.state.categorie}
+            value={categorie}
             onChange={this.handleInputChange}
           >
             <option value="1">Jean</option>
@@ -122,59 +121,26 @@ class ProductForm extends Component {
         </label>
         <br />
         <label>
-          Zone de filature :
-          <select
-            name="zone_filature"
-            value={this.state.categorie}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
+          Marque :
+          <select name="brand" value={brand} onChange={this.s}>
+            {brands &&
+              brands.map(brand => {
+                return (
+                  <option key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </option>
+                );
+              })}
           </select>
         </label>
         <br />
         <label>
-          Zone de tissage :
-          <select
-            name="zone_tissage"
-            value={this.state.categorie}
+          Price :
+          <textarea
+            name="price"
+            value={price}
             onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Zone d'eutrophisation :
-          <select
-            name="zone_eutrophisation"
-            value={this.state.categorie}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Zone de production :
-          <select
-            name="zone_production"
-            value={this.state.categorie}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
-          </select>
+          />
         </label>
         <br />
 
@@ -190,8 +156,63 @@ class ProductForm extends Component {
           handleInputChange={this.handleInputChange}
         />
         <br />
-
-        <input type="submit" value="Submit" />
+        <label>
+          Zone de filature :
+          <select
+            name="zone_filature"
+            value={zone_filature}
+            onChange={this.handleInputChange}
+          >
+            <option value="1">France</option>
+            <option value="2">Inde</option>
+            <option value="3">Vietnam</option>
+            <option value="4">Belgique</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Zone de tissage :
+          <select
+            name="zone_tissage"
+            value={zone_tissage}
+            onChange={this.handleInputChange}
+          >
+            <option value="1">France</option>
+            <option value="2">Inde</option>
+            <option value="3">Vietnam</option>
+            <option value="4">Belgique</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Zone d'eutrophisation :
+          <select
+            name="zone_eutrophisation"
+            value={zone_eutrophisation}
+            onChange={this.handleInputChange}
+          >
+            <option value="1">France</option>
+            <option value="2">Inde</option>
+            <option value="3">Vietnam</option>
+            <option value="4">Belgique</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Zone de production :
+          <select
+            name="zone_production"
+            value={zone_production}
+            onChange={this.handleInputChange}
+          >
+            <option value="1">France</option>
+            <option value="2">Inde</option>
+            <option value="3">Vietnam</option>
+            <option value="4">Belgique</option>
+          </select>
+        </label>
+        <br />
+        <input className="btn btn-primary" type="submit" value="Submit" />
       </form>
     );
   }
