@@ -55,16 +55,17 @@ class Item extends Component {
             <h6 className="card-subtitle mb-2 text-muted">
               {this.state.item.code_ref}
             </h6>
-            <button onClick={this.openModal} className="btn btn-primary">
-              Show Details
-            </button>
-            <button
-              className="btn btn-danger"
-              //className="delete-btn"
-              onClick={() => this.props.deleteItem(this.state.item.id)}
-            >
-              Delete
-            </button>
+            <div class="btn-toolbar">
+              <button onClick={this.openModal} className="btn btn-primary">
+                Show Details
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => this.props.deleteItem(this.state.item.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
         <Modal
@@ -78,7 +79,7 @@ class Item extends Component {
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
-          <ItemDetails item={this.state.item} closeModal={this.closeModal}/>
+          <ItemDetails item={this.state.item} closeModal={this.closeModal} getBrandName={this.getBrandName}/>
         </Modal>
       </div>
 
@@ -114,7 +115,7 @@ class Item extends Component {
       //         Production zone : {this.state.item.zone_production}
       //       </div>
       //       <div className="zone_filature">
-      //         Brand id : {this.getBrandName(this.state.item.brand_id)}
+      //         
       //       </div>
       //     </div>
       //   ) : null}
