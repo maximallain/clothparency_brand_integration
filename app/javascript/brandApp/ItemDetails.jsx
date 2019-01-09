@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class ItemDetails extends Component {
   state = {
     item: this.props.item,
+    brand: this.props.brand,
     closeModal: this.props.closeModal
   };
 
@@ -46,10 +47,10 @@ class ItemDetails extends Component {
                 <th scope="row">Production zone</th>
                 <td>{this.state.item.zone_production}</td>
               </tr>
-              {/* <tr>
-                <th scope="row">Brand id</th>
-                <td>{this.getBrandName(this.state.item.brand_id)}</td>
-              </tr> */}
+              <tr>
+                <th scope="row">Brand</th>
+                <td>{this.state.brand}</td>
+              </tr>
             </tbody>
           </table>
         </div>

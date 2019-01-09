@@ -17,6 +17,7 @@ const customStyles = {
 class Item extends Component {
   state = {
     item: this.props.item,
+    //brand: this.getBrandName(this.props.item.brand_id),
     showDetails: false,
     openModal: false
   };
@@ -45,8 +46,9 @@ class Item extends Component {
     }
   };
 
+
   render() {
-    console.log(this.state.item);
+    console.log(this.state);
     return (
       <div className="col-sm-6">
         <div className="card item-card">
@@ -79,7 +81,7 @@ class Item extends Component {
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
-          <ItemDetails item={this.state.item} closeModal={this.closeModal} getBrandName={this.getBrandName}/>
+          <ItemDetails item={this.state.item} closeModal={this.closeModal} brand={this.getBrandName(this.state.item.brand_id)}/>
         </Modal>
       </div>
 
