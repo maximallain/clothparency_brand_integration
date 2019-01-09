@@ -7,7 +7,7 @@ class ItemDetails extends Component {
     category: this.props.category,
     closeModal: this.props.closeModal,
     materials: this.props.materials,
-    labelProducts:  this.props.labelProducts,
+    labelProducts: this.props.labelProducts
   };
 
   render() {
@@ -64,28 +64,36 @@ class ItemDetails extends Component {
               <tr>
                 <th scope="row">Composition</th>
                 <td>
-                  {this.state.materials.map(material => {
-                    return (
-                      <tr key={material.name}>
-                        <th scope="row" />
-                        <td className="material-name">{material.name}</td>
-                        <td>{material.percent}%</td>
-                      </tr>
-                    );
-                  })}
+                  <table>
+                    <tbody>
+                      {this.state.materials.map(material => {
+                        return (
+                          <tr key={material.name}>
+                            <th scope="row" />
+                            <td className="material-name">{material.name}</td>
+                            <td>{material.percent}%</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </td>
               </tr>
               <tr>
                 <th scope="row">Labels</th>
                 <td>
-                  {this.state.labelProducts.map(label => {
-                    return (
-                      <tr key={label}>
-                        <th scope="row" />
-                        <td className="material-name">{label}</td>
-                      </tr>
-                    );
-                  })}
+                  <table>
+                    <tbody>
+                      {this.state.labelProducts.map(label => {
+                        return (
+                          <tr key={label}>
+                            <th scope="row" />
+                            <td className="material-name">{label}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </td>
               </tr>
             </tbody>
