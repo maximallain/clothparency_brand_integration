@@ -143,7 +143,6 @@ class ProductForm extends Component {
           />
         </label>
         <br />
-
         <MaterialItem
           number="1"
           value="material1"
@@ -212,7 +211,19 @@ class ProductForm extends Component {
           </select>
         </label>
         <br />
-        <input className="btn btn-primary" type="submit" value="Submit" />
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            bsStyle="success"
+            onClick={this.closeModal}
+          >
+            Fermer
+          </button>
+          <button type="button" className="btn btn-primary">
+            Valider
+          </button>
+        </div>{" "}
       </form>
     );
   }
