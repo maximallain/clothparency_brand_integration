@@ -47,24 +47,27 @@ class ItemsList extends Component {
   }
 
   render() {
-    console.log(this.state.brands);
     return (
-      <div className='items-list'>
-        {this.state.items.map(item => (
-          <Item
-            key={item.id}
-            item={item}
-            deleteItem={this.deleteItem}
-            brands={this.state.brands}
-          />
-        ))}
-        <button
+      <div className="container items-list">
+        <div className="row">
+          {this.state.items.map(item => (
+            <Item
+              key={item.id}
+              item={item}
+              deleteItem={this.deleteItem}
+              brands={this.state.brands}
+            />
+          ))}
+        </div>
+
+        {/* <button
           type="button"
           className="btn btn-primary"
           onClick={this.openModal}
         >
           Ajouter un produit
         </button>
+
         <Modal
           isOpen={this.state.modalIsOpen}
           // onAfterOpen={this.afterOpenModal}
@@ -78,19 +81,13 @@ class ItemsList extends Component {
         >
           <div className="modal-header">
             <h5 className="modal-title">Ajouter un produit</h5>
-            <button
-              type="button"
-              className="close"
-              //data-dismiss="modal"
-              //aria-label="Close"
-              onClick={this.closeModal}
-            >
+            <button type="button" className="close" onClick={this.closeModal}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <ProductForm brands={this.state.brands} />
         </Modal>
-        {/* Test */}
+
 
         <div
           className="modal fade"
@@ -129,7 +126,7 @@ class ItemsList extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

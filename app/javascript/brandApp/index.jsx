@@ -7,10 +7,10 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 //import ProductForm from "./ProductForm";
 import ItemsList from "./ItemsList";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = props => <ItemsList />;
 
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<App />, document.querySelector("#root"));
 });
-
