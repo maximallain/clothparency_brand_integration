@@ -2,7 +2,7 @@
 @import "home";
 
 .items-list {
-  padding-top: 80px;
+  padding-top: 20px;
   display: flex;
   justify-content: center;
 }
@@ -10,12 +10,14 @@
 .modal-header {
   display: flex;
   justify-content: space-between;
-  .modal-header {
-    justify-content: space-between;
-  }
+  border-bottom: none;
   .close {
     justify-content: space-between;
   }
+}
+.modal-header::before,
+.modal-header::after {
+  content: none;
 }
 
 .item-card {
@@ -30,4 +32,12 @@
   .btn {
     margin: 5px;
   }
+}
+
+.badge {
+  margin-left: 10px;
+}
+
+.material-name {
+  padding-right: 10px;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>CLOTHPARENCY</title>
+    <title>Clothparency</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -13,10 +13,10 @@
     </head>
   <body>
     <div class="navbar-wagon-brand" style="justify-content:space-between">
-      <a style='display:flex; align-items:center' href="/">
+      <div style='display:flex; align-items:center' href="/">
         <img height="50" src="/assets/logo.png" />
-        <p class="clothparency-nav">Clothparency</p>
-      </a>
+        <p class="clothparency-nav">CLOTHPARENCY</p>
+      </div>
       <p class="navbar-text pull-right" style="font-size: 14px">
       <% if user_signed_in? %>
         Logged in as <strong><%= current_user.email %></strong>.

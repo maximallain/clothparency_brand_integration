@@ -17,7 +17,10 @@ const customStyles = {
 class Item extends Component {
   state = {
     item: this.props.item,
-    //brand: this.getBrandName(this.props.item.brand_id),
+    brand: this.props.brand,
+    category: this.props.category,
+    materials: this.props.materials,
+    labelProducts: this.props.labelProducts,
     showDetails: false,
     openModal: false
   };
@@ -30,14 +33,6 @@ class Item extends Component {
     this.setState({ modalIsOpen: false });
   };
 
-  getBrandName = id => {
-    let name = "NO NAME";
-    this.props.brands.map(
-      brand => brand.id === this.state.item.brand_id && (name = brand.name)
-    );
-    return name;
-  };
-
   onClick = () => {
     if (this.state.showDetails) {
       this.setState({ showDetails: false });
@@ -46,9 +41,7 @@ class Item extends Component {
     }
   };
 
-
   render() {
-    console.log(this.state);
     return (
       <div className="col-sm-6">
         <div className="card item-card">
@@ -56,8 +49,11 @@ class Item extends Component {
             <h2 className="card-title">{this.state.item.name_ref}</h2>
             <h6 className="card-subtitle mb-2 text-muted">
               {this.state.item.code_ref}
+              <span className="badge badge-secondary">
+                {this.state.category}
+              </span>
             </h6>
-            <div class="btn-toolbar">
+            <div className="btn-toolbar">
               <button onClick={this.openModal} className="btn btn-primary">
                 Show Details
               </button>
@@ -77,7 +73,14 @@ class Item extends Component {
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
-          <ItemDetails item={this.state.item} closeModal={this.closeModal} brand={this.getBrandName(this.state.item.brand_id)}/>
+          <ItemDetails
+            item={this.state.item}
+            closeModal={this.closeModal}
+            brand={this.state.brand}
+            category={this.state.category}
+            materials={this.state.materials}
+            labelProducts={this.state.labelProducts}
+          />
         </Modal>
       </div>
     );

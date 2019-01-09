@@ -4,13 +4,16 @@ class ItemDetails extends Component {
   state = {
     item: this.props.item,
     brand: this.props.brand,
-    closeModal: this.props.closeModal
+    category: this.props.category,
+    closeModal: this.props.closeModal,
+    materials: this.props.materials,
+    labelProducts:  this.props.labelProducts,
   };
 
   render() {
     return (
       <div>
-        <div className="modal-body">
+        <div className="modal-header">
           <h5 className="modal-title" id="exampleModalLabel">
             {this.state.item.name_ref}
           </h5>
@@ -21,11 +24,21 @@ class ItemDetails extends Component {
           >
             <span aria-hidden="true">&times;</span>
           </button>
+        </div>
+        <div className="modal-body">
           <table className="table">
             <tbody>
               <tr>
                 <th scope="row">Reference Code</th>
                 <td>{this.state.item.code_ref}</td>
+              </tr>
+              <tr>
+                <th scope="row">Brand</th>
+                <td>{this.state.brand}</td>
+              </tr>
+              <tr>
+                <th scope="row">Category</th>
+                <td>{this.state.category}</td>
               </tr>
               <tr>
                 <th scope="row">Price</th>
@@ -47,9 +60,33 @@ class ItemDetails extends Component {
                 <th scope="row">Production zone</th>
                 <td>{this.state.item.zone_production}</td>
               </tr>
+
               <tr>
-                <th scope="row">Brand</th>
-                <td>{this.state.brand}</td>
+                <th scope="row">Composition</th>
+                <td>
+                  {this.state.materials.map(material => {
+                    return (
+                      <tr key={material.name}>
+                        <th scope="row" />
+                        <td className="material-name">{material.name}</td>
+                        <td>{material.percent}%</td>
+                      </tr>
+                    );
+                  })}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Labels</th>
+                <td>
+                  {this.state.labelProducts.map(label => {
+                    return (
+                      <tr key={label}>
+                        <th scope="row" />
+                        <td className="material-name">{label}</td>
+                      </tr>
+                    );
+                  })}
+                </td>
               </tr>
             </tbody>
           </table>

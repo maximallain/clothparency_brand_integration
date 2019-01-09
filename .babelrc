@@ -21,6 +21,9 @@
       {
         "spec": true
       }
-    ]
+    ],
+    ["transform-runtime", {
+      "regenerator": true
+  }]
   ]
 }

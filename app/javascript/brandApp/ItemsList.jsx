@@ -36,51 +36,105 @@ class ItemsList extends Component {
     });
   };
 
+  getBrandName = id => {
+    let brand_name = "NO BRAND";
+    this.state.brands.map(
+      brand => brand.id === id && (brand_name = brand.name)
+    );
+    return brand_name;
+  };
+
+  getCategoryName = id => {
+    let category_name = "NO CATEGORY";
+    this.state.categories.map(
+      category => category.id === id && (category_name = category.name)
+    );
+    return category_name;
+  };
+
+  getMaterialName = id => {
+    let material_name = "NO MATERIAL NAME";
+    this.state.materials.map(
+      material => material.id === id && (material_name = material.name)
+    );
+    return material_name;
+  };
+
+  getMaterials = id => {
+    let materials = [];
+    this.state.assemblies.map(
+      assembly =>
+        assembly.item_id === id &&
+        materials.push({
+          name: this.getMaterialName(assembly.material_id),
+          percent: assembly.percent
+        })
+    );
+    return materials;
+  };
+
+  getLabelName = id => {
+    let label_name = "NO LABEL NAME";
+    this.state.labelProducts.map(
+      label => label.id === id && (label_name = label.name)
+    );
+    return label_name;
+  };
+
+  getLabelProducts = id => {
+    let labelProducts = [];
+    this.state.specifications.map(
+      specification =>
+      specification.item_id === id &&
+        labelProducts.push(
+          this.getLabelName(specification.label_product_id),
+        )
+    );
+    return labelProducts;
+  };
+
+  async getData() {
+    const categoriesRes = await fetch(
+      "http://localhost:3000/api/v1/categories"
+    );
+    const categories = await categoriesRes.json();
+    const brandsRes = await fetch("http://localhost:3000/api/v1/brands");
+    const brands = await brandsRes.json();
+    const materialsRes = await fetch("http://localhost:3000/api/v1/materials");
+    const materials = await materialsRes.json();
+    const labelProductsRes = await fetch(
+      "http://localhost:3000/api/v1/label_products"
+    );
+    const labelProducts = await labelProductsRes.json();
+    const assembliesRes = await fetch(
+      "http://localhost:3000/api/v1/assemblies"
+    );
+    const assemblies = await assembliesRes.json();
+    const specificationsRes = await fetch(
+      "http://localhost:3000/api/v1/specifications"
+    );
+    const specifications = await specificationsRes.json();
+    const itemsRes = await fetch("http://localhost:3000/api/v1/items");
+    const items = await itemsRes.json();
+    this.setState({
+      categories: categories,
+      brands: brands,
+      materials: materials,
+      labelProducts: labelProducts,
+      assemblies: assemblies,
+      specifications: specifications,
+      items: items
+    });
+  }
+
   componentWillMount() {
-    fetch("http://localhost:3000/api/v1/brands")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ brands: data });
-      });
-
-    fetch("http://localhost:3000/api/v1/categories")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ categories: data });
-      });
-
-    fetch("http://localhost:3000/api/v1/materials")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ materials: data });
-      });
-
-    fetch("http://localhost:3000/api/v1/labelproducts")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ labelProducts: data });
-      });
-
-    fetch("http://localhost:3000/api/v1/assemblies")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ assemblies: data });
-      });
-
-    fetch("http://localhost:3000/api/v1/specifications")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ specifications: data });
-      });
-
-    fetch("http://localhost:3000/api/v1/items")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ items: data });
-      });
+    this.getData();
   }
 
   render() {
+    console.log(this.state)
+
+
     return (
       <div className="container items-list">
         <div className="row">
@@ -89,7 +143,10 @@ class ItemsList extends Component {
               key={item.id}
               item={item}
               deleteItem={this.deleteItem}
-              brands={this.state.brands}
+              brand={this.getBrandName(item.brand_id)}
+              category={this.getCategoryName(item.category_id)}
+              materials={this.getMaterials(item.id)}
+              labelProducts={this.getLabelProducts(item.id)}
             />
           ))}
         </div>
