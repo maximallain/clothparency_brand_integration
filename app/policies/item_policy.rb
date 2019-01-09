@@ -16,4 +16,16 @@ class ItemPolicy < ApplicationPolicy
   def index?
     return true
   end
+
+  def destroy?
+    return true
+  end
+
+  def update?
+    return true
+  end
+
+  def set_item?
+    return true
+  end
 end

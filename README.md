@@ -1,8 +1,31 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+Application Rails générée avec [lewagon/rails-templates](https://github.com/lewagon/rails-templates), créé par  [Le Wagon coding bootcamp](https://www.lewagon.com)
 
+## Fonctionnalités
 
-## Command
+### Rails
+- Authentification avec Devise
+- Autorisation avec Pundit
+- Base de données accessible par API CRUD (création, affichage, mise à jour, suppression)
+
+### React
+- Affichage de la liste des vêtements
+- Affichage en modal du détail d'un vêtement
+- Création et suppression d'un vêtement
+
+### Next Steps
+ - Mise à jour d'un vêtement
+ - Association d'un compte avec une marque
+ - Affichage du score du vêtement
+ - Filtres pour la recherche de vêtements (data de création, catégorie)
+ - Authentification des administrateurs
+ - Téléversement de fichiers
+
+## Getting started
+
+- `yarn install`
+
+- Migration `rails db:migrate`
 
 - Start server `rails server`
 
-- Migration `bin/rails db:migrate RAILS_ENV=development` => http://localhost:3000/
+- Browse to `http://localhost:3000/`
