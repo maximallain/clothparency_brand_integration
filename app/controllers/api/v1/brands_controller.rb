@@ -18,7 +18,7 @@ class Api::V1::BrandsController < Api::V1::BaseController
     end
 
     def brand_params
-        params.require(:name)
+        params.require(:brand).permit(:name)
 
     end
 

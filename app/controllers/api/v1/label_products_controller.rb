@@ -18,7 +18,7 @@ class Api::V1::LabelProductsController < Api::V1::BaseController
     end
 
     def label_product_params
-        params.require(:name)
+        params.require(:label_product).permit(:name)
 
     end
 
