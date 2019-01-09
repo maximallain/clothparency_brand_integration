@@ -1,7 +1,6 @@
 # app/controllers/api/v1/base_controller.rb
 class Api::V1::BaseController < ActionController::API
 
-=begin
     include Pundit
 
     after_action :verify_authorized, except: :index
@@ -11,8 +10,6 @@ class Api::V1::BaseController < ActionController::API
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     private
-
-=end
 
     def user_not_authorized(exception)
         render json: {

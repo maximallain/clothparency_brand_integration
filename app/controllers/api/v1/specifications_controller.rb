@@ -18,7 +18,7 @@ class Api::V1::SpecificationsController < Api::V1::BaseController
     end
 
     def specification_params
-        params.require(:name)
+        params.require(:specification).permit(:name)
 
     end
 

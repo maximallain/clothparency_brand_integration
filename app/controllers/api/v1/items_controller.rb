@@ -2,27 +2,14 @@
 class Api::V1::ItemsController < Api::V1::BaseController
     before_action :set_item, only: [ :show, :update, :destroy]
     def index
-        # @items = policy_scope(Item)
-        @items = Item.all
+        @items = policy_scope(Item)
     end
 
     def show
-
-    end
-
-    # private
-
-    def set_item
-        @item = Item.find(params[:id])
-        # authorize @restaurant # For Pundit
-    end
-
-    def item_params
-        params.require(:item).permit(:code_ref, :name_ref, :brand_id, :category_id, :zone_filature, :zone_tissage,:zone_eutrophisation, :zone_production, :price, :photo)
     end
 
     def create
-        p params
+        authorize Item
         @item=Item.new(item_params)
         if @item.save
             render :show, status: :created
@@ -44,9 +31,21 @@ class Api::V1::ItemsController < Api::V1::BaseController
         head :no_content
     end
 
+
+    private
+
+    def set_item
+        @item = Item.find(params[:id])
+        authorize @item # For Pundit
+    end
+
+    def item_params
+        params.require(:item).permit(:code_ref, :name_ref, :brand_id, :category_id, :zone_filature, :zone_tissage,:zone_eutrophisation, :zone_production, :price, :photo)
+    end
+
     def render_error
         render json:{errors: @item.errors.full_messages },
-            status: :unprocessable_entity
+        status: :unprocessable_entity
     end
 
 end

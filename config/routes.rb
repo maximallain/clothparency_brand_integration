@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get 'db/index'
-  get 'db' => 'db#index'
-  root to: 'pages#index'
+  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  root to: 'pages#index'
+  get '/items' => 'pages#index'
+  get '/items/:id', to: 'pages#index'
 
   # API
   namespace :api, defaults: { format: :json } do
@@ -17,10 +18,7 @@ Rails.application.routes.draw do
       resources :specifications, only: [ :index, :show, :create, :update, :destroy]
     end
   end
-
-  get '/items' => 'pages#index'
-  get '/items/:id', to: 'pages#show'
-
-  get 'test' => 'pages#test'
+  
+  
 
 end

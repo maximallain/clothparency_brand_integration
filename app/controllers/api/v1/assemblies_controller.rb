@@ -18,7 +18,7 @@ class Api::V1::AssembliesController < Api::V1::BaseController
     end
 
     def assembly_params
-        params.require(:name)
+        params.require(:assembly).permit(:name)
 
     end
 
