@@ -11,6 +11,10 @@ class ItemsList extends Component {
     items: [],
     brands: [],
     categories: [],
+    materials: [],
+    labelProducts: [],
+    assemblies: [],
+    specifications: [],
     modalIsOpen: false
   };
 
@@ -37,6 +41,36 @@ class ItemsList extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ brands: data });
+      });
+
+    fetch("http://localhost:3000/api/v1/categories")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ categories: data });
+      });
+
+    fetch("http://localhost:3000/api/v1/materials")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ materials: data });
+      });
+
+    fetch("http://localhost:3000/api/v1/labelproducts")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ labelProducts: data });
+      });
+
+    fetch("http://localhost:3000/api/v1/assemblies")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ assemblies: data });
+      });
+
+    fetch("http://localhost:3000/api/v1/specifications")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ specifications: data });
       });
 
     fetch("http://localhost:3000/api/v1/items")

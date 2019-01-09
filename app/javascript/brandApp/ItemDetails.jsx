@@ -21,7 +21,7 @@ class ItemDetails extends Component {
           >
             <span aria-hidden="true">&times;</span>
           </button>
-          <table class="table">
+          <table className="table">
             <tbody>
               <tr>
                 <th scope="row">Reference Code</th>
