@@ -25,7 +25,8 @@ class ProductForm extends Component {
     zone_production: -1,
     zone_tissage: -1,
     materials: {},
-    brand_id: this.props.brands[0].id,
+    labelProducts: {},
+    brand_id: -1,
     price: -1
   };
 
@@ -65,15 +66,8 @@ class ProductForm extends Component {
     });
   };
 
-  renderMaterial(number) {
-    var components = "";
-    for (let i = 0; i > number; i++) {}
-
-    return components;
-  }
-
   render() {
-    const { brands } = this.props;
+    const { brands, categories } = this.props;
     const {
       code_ref,
       name_ref,
@@ -86,145 +80,81 @@ class ProductForm extends Component {
       price
     } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Code :
-          <textarea
-            name="code_ref"
-            value={code_ref}
-            onChange={this.handleInputChange}
-            className="form-control"
-          />
-        </label>
-        <br />
-        <label>
-          Name :
-          <textarea
-            name="name_ref"
-            value={name_ref}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Catégorie :
-          <select
-            name="categorie"
-            value={categorie}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">Jean</option>
-            <option value="2">T-Shirt</option>
-            <option value="3">Jupe</option>
-            <option value="4">Robe</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Marque :
-          <select name="brand" value={brand} onChange={this.s}>
-            {brands &&
-              brands.map(brand => {
-                return (
-                  <option key={brand.id} value={brand.id}>
-                    {brand.name}
-                  </option>
-                );
-              })}
-          </select>
-        </label>
-        <br />
-        <label>
-          Price :
-          <textarea
-            name="price"
-            value={price}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
-        <MaterialItem
-          number="1"
-          value="material1"
-          handleInputChange={this.handleInputChange}
-        />
-        <br />
-        <MaterialItem
-          number="2"
-          value="material2"
-          handleInputChange={this.handleInputChange}
-        />
-        <br />
-        <label>
-          Zone de filature :
-          <select
-            name="zone_filature"
-            value={zone_filature}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Zone de tissage :
-          <select
-            name="zone_tissage"
-            value={zone_tissage}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Zone d'eutrophisation :
-          <select
-            name="zone_eutrophisation"
-            value={zone_eutrophisation}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Zone de production :
-          <select
-            name="zone_production"
-            value={zone_production}
-            onChange={this.handleInputChange}
-          >
-            <option value="1">France</option>
-            <option value="2">Inde</option>
-            <option value="3">Vietnam</option>
-            <option value="4">Belgique</option>
-          </select>
-        </label>
-        <br />
-        <div className="modal-footer">
+      <div>
+        <div className="modal-header-2">
           <button
             type="button"
-            className="btn btn-secondary"
-            bsStyle="success"
-            onClick={this.closeModal}
+            className="close"
+            onClick={this.props.closeModal}
           >
-            Fermer
+            <span aria-hidden="true">&times;</span>
           </button>
-          <button type="button" className="btn btn-primary">
-            Valider
-          </button>
-        </div>{" "}
-      </form>
+        </div>
+        <div className="modal-body">
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Name</label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Name"
+                />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Reference</label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Reference"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label className="col-sm-2 col-form-label">Marque</label>
+              <div className="col-sm-10">
+                <select
+                  class="custom-select mr-sm-2"
+                  id="inlineFormCustomSelect"
+                >
+                  <option selected>-</option>
+                  {brands.map(brand => {
+                    return <option value={brand.id}>{brand.name}</option>;
+                  })}
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label className="col-sm-2 col-form-label">Catégorie</label>
+              <div className="col-sm-10">
+                <select
+                  class="custom-select mr-sm-2"
+                  id="inlineFormCustomSelect"
+                >
+                  <option selected>-</option>
+                  {categories.map(category => {
+                    return <option value={category.id}>{category.name}</option>;
+                  })}
+                </select>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              bsStyle="success"
+              onClick={this.props.closeModal}
+            >
+              Fermer
+            </button>
+            <button type="submit" className="btn btn-primary">
+              Valider
+            </button>
+          </form>
+        </div>
+      </div>
     );
   }
 }

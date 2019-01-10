@@ -85,10 +85,8 @@ class ItemsList extends Component {
     let labelProducts = [];
     this.state.specifications.map(
       specification =>
-      specification.item_id === id &&
-        labelProducts.push(
-          this.getLabelName(specification.label_product_id),
-        )
+        specification.item_id === id &&
+        labelProducts.push(this.getLabelName(specification.label_product_id))
     );
     return labelProducts;
   };
@@ -132,92 +130,44 @@ class ItemsList extends Component {
   }
 
   render() {
-    console.log(this.state)
-
+    console.log(this.state);
 
     return (
-      <div className="container items-list">
-        <div className="row">
-          {this.state.items.map(item => (
-            <Item
-              key={item.id}
-              item={item}
-              deleteItem={this.deleteItem}
-              brand={this.getBrandName(item.brand_id)}
-              category={this.getCategoryName(item.category_id)}
-              materials={this.getMaterials(item.id)}
-              labelProducts={this.getLabelProducts(item.id)}
-            />
-          ))}
+      <div className="container container-global">
+        <div className="container items-list">
+          <div className="row">
+            {this.state.items.map(item => (
+              <Item
+                key={item.id}
+                item={item}
+                deleteItem={this.deleteItem}
+                brand={this.getBrandName(item.brand_id)}
+                category={this.getCategoryName(item.category_id)}
+                materials={this.getMaterials(item.id)}
+                labelProducts={this.getLabelProducts(item.id)}
+              />
+            ))}
+          </div>
         </div>
-
-        {/* <button
+        <button
           type="button"
           className="btn btn-primary"
           onClick={this.openModal}
         >
           Ajouter un produit
         </button>
-
         <Modal
           isOpen={this.state.modalIsOpen}
-          // onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
-          //style={customStyles}
-          // contentLabel="Example Modal"
-          //className="modal-component"
-          // {...this.props}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
-          <div className="modal-header">
-            <h5 className="modal-title">Ajouter un produit</h5>
-            <button type="button" className="close" onClick={this.closeModal}>
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <ProductForm brands={this.state.brands} />
+          <ProductForm
+            brands={this.state.brands}
+            categories={this.state.categories}
+            closeModal={this.closeModal}
+          />
         </Modal>
-
-
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">...</div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  bsStyle="success"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary" />
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     );
   }

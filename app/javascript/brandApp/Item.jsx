@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import picture from "../../assets/images/jean.jpeg";
 import Modal from "react-modal";
 import ItemDetails from "./ItemDetails";
 
@@ -21,7 +20,6 @@ class Item extends Component {
     category: this.props.category,
     materials: this.props.materials,
     labelProducts: this.props.labelProducts,
-    showDetails: false,
     openModal: false
   };
 
@@ -31,14 +29,6 @@ class Item extends Component {
 
   closeModal = () => {
     this.setState({ modalIsOpen: false });
-  };
-
-  onClick = () => {
-    if (this.state.showDetails) {
-      this.setState({ showDetails: false });
-    } else {
-      this.setState({ showDetails: true });
-    }
   };
 
   render() {
