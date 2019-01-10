@@ -19,15 +19,17 @@ class ProductForm extends Component {
   state = {
     code_ref: "",
     name_ref: "",
-    categorie: -1,
-    zone_filature: -1,
-    zone_eutrophisation: -1,
-    zone_production: -1,
-    zone_tissage: -1,
+    zone_filature: "",
+    zone_eutrophisation: "",
+    zone_production: "",
+    zone_tissage: "",
     materials: {},
     labelProducts: {},
     brand_id: -1,
-    price: -1
+    brand_name: "",
+    category_id: -1,
+    category_name: "",
+    price: ""
   };
 
   handleInputChange = event => {
@@ -47,9 +49,31 @@ class ProductForm extends Component {
   };
 
   handleBrandChange = event => {
-    this.setState({
-      brand_id: event.target.value
-    });
+    const target = event.target;
+    const value = target.value;
+
+    for (let node of target.children) {
+      if (node.value === value) {
+        this.setState({
+          brand_id: node.getAttribute("data-key"),
+          brand_name: node.value
+        });
+      }
+    }
+  };
+
+  handleCategoryChange = event => {
+    const target = event.target;
+    const value = target.value;
+
+    for (let node of target.children) {
+      if (node.value === value) {
+        this.setState({
+          category_id: node.getAttribute("data-key"),
+          category_name: node.value
+        });
+      }
+    }
   };
 
   handleSubmit = event => {
@@ -62,7 +86,20 @@ class ProductForm extends Component {
         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
           .attributes.content.value
       },
-      body: JSON.stringify({ item: this.state })
+      body: JSON.stringify({
+        item: {
+          name_ref: this.state.name_ref,
+          code_ref: this.state.code_ref,
+          brand_id: this.state.brand_id,
+          category_id: this.state.category_id,
+          zone_eutrophisation: this.state.zone_eutrophisation,
+          zone_filature: this.state.zone_filature,
+          zone_production: this.state.zone_production,
+          zone_tissage: this.state.zone_tissage,
+          price: price
+        }
+      })
+      //this.state })
     });
   };
 
@@ -71,12 +108,12 @@ class ProductForm extends Component {
     const {
       code_ref,
       name_ref,
-      categorie,
       zone_filature,
       zone_tissage,
       zone_eutrophisation,
       zone_production,
-      brand,
+      brand_name,
+      category_name,
       price
     } = this.state;
     return (
@@ -93,54 +130,151 @@ class ProductForm extends Component {
         <div className="modal-body">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Name</label>
+              <label className="col-sm-2 col-form-label">Nom</label>
               <div className="col-sm-10">
                 <input
                   type="text"
                   className="form-control"
+                  name="name_ref"
                   placeholder="Name"
+                  value={name_ref}
+                  onChange={this.handleInputChange}
                 />
               </div>
             </div>
             <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Reference</label>
+              <label className="col-sm-2 col-form-label">Référence</label>
               <div className="col-sm-10">
                 <input
                   type="text"
                   className="form-control"
+                  name="code_ref"
                   placeholder="Reference"
+                  value={code_ref}
+                  onChange={this.handleInputChange}
                 />
               </div>
             </div>
 
-            <div class="form-group row">
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Prix</label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="price"
+                  placeholder="Prix"
+                  value={price}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+
+            <div className="form-group row">
               <label className="col-sm-2 col-form-label">Marque</label>
               <div className="col-sm-10">
                 <select
-                  class="custom-select mr-sm-2"
+                  className="custom-select mr-sm-2"
                   id="inlineFormCustomSelect"
+                  name="brand_name"
+                  value={brand_name}
+                  onChange={this.handleBrandChange}
                 >
-                  <option selected>-</option>
+                  <option key={0} data-key={0} defaultValue>
+                    -
+                  </option>
                   {brands.map(brand => {
-                    return <option value={brand.id}>{brand.name}</option>;
+                    return (
+                      <option key={brand.id} data-key={brand.id}>
+                        {brand.name}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
             </div>
-            <div class="form-group row">
+            <div className="form-group row">
               <label className="col-sm-2 col-form-label">Catégorie</label>
               <div className="col-sm-10">
                 <select
-                  class="custom-select mr-sm-2"
+                  className="custom-select mr-sm-2"
                   id="inlineFormCustomSelect"
+                  name="categorie_name"
+                  value={category_name}
+                  onChange={this.handleCategoryChange}
                 >
-                  <option selected>-</option>
+                  <option key={0} data-key={0} defaultValue>
+                    -
+                  </option>
                   {categories.map(category => {
-                    return <option value={category.id}>{category.name}</option>;
+                    return (
+                      <option key={category.id} data-key={category.id}>
+                        {category.name}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
             </div>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                Zone de filature
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="zone_filature"
+                  placeholder="Zone de filature"
+                  value={zone_filature}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                Zone d'eutrophisation
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="zone_eutrophisation"
+                  placeholder="Zone d'eutrophisation"
+                  value={zone_eutrophisation}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                Zone de production
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="zone_production"
+                  placeholder="Zone de production"
+                  value={zone_production}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Zone de tissage</label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="zone_tissage"
+                  placeholder="Zone de tissage"
+                  value={zone_tissage}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+
             <button
               type="button"
               className="btn btn-secondary"

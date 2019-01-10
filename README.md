@@ -14,6 +14,7 @@ Application Rails générée avec [lewagon/rails-templates](https://github.com/l
 
 ### Next Steps
  - Mise à jour d'un vêtement
+ - Validation des champs de création
  - Association d'un compte avec une marque
  - Affichage du score du vêtement
  - Filtres pour la recherche de vêtements (data de création, catégorie)

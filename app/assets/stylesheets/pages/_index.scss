@@ -12,15 +12,15 @@
   justify-content: space-between;
   border-bottom: none;
 }
+.modal-header::before,
+.modal-header::after {
+  content: none;
+}
 
 .modal-header-2 {
   padding-bottom: 20px;
   justify-content: right;
   border-bottom: none;
-}
-.modal-header::before,
-.modal-header::after {
-  content: none;
 }
 
 .item-card {
