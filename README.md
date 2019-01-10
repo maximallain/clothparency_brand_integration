@@ -1,5 +1,8 @@
 Application Rails générée avec [lewagon/rails-templates](https://github.com/lewagon/rails-templates), créé par  [Le Wagon coding bootcamp](https://www.lewagon.com)
 
+L'application a été configurée initialement pour pouvoir être exécutée sur Heroku (SGBDR: PostgreSQL).
+
+
 ## Fonctionnalités
 
 ### Rails
@@ -22,10 +25,10 @@ Application Rails générée avec [lewagon/rails-templates](https://github.com/l
 
 ## Getting started
 
-- `yarn install`
+- Installation des dépendances Javascript `yarn install`
 
 - Migration `rails db:migrate`
 
-- Start server `rails server`
+- Lancement du serveur en local `rails server`
 
-- Browse to `http://localhost:3000/`
+- Navigation sur `http://localhost:3000/`
