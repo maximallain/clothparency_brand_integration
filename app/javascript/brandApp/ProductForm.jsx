@@ -19,17 +19,16 @@ class ProductForm extends Component {
   state = {
     code_ref: "",
     name_ref: "",
-    zone_filature: "",
-    zone_eutrophisation: "",
-    zone_production: "",
-    zone_tissage: "",
-    materials: {},
-    labelProducts: {},
+    price: "",
     brand_id: -1,
     brand_name: "",
     category_id: -1,
     category_name: "",
-    price: ""
+    zone_filature: "",
+    zone_eutrophisation: "",
+    zone_production: "",
+    zone_tissage: "",
+    labelProducts: {}
   };
 
   handleInputChange = event => {
@@ -96,25 +95,24 @@ class ProductForm extends Component {
           zone_filature: this.state.zone_filature,
           zone_production: this.state.zone_production,
           zone_tissage: this.state.zone_tissage,
-          price: price
+          price: this.state.price
         }
       })
-      //this.state })
     });
   };
 
   render() {
-    const { brands, categories } = this.props;
+    const { brands, categories, materials } = this.props;
     const {
       code_ref,
       name_ref,
+      price,
+      brand_name,
+      category_name,
       zone_filature,
       zone_tissage,
       zone_eutrophisation,
-      zone_production,
-      brand_name,
-      category_name,
-      price
+      zone_production
     } = this.state;
     return (
       <div>

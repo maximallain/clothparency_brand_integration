@@ -130,8 +130,6 @@ class ItemsList extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     return (
       <div className="container container-global">
         <div className="container items-list">

@@ -16,6 +16,7 @@ L'application a été configurée initialement pour pouvoir être exécutée sur
 - Création et suppression d'un vêtement
 
 ### Next Steps
+ - Ajouter la composition et les labels dans la création d'un vêtement
  - Mise à jour d'un vêtement
  - Validation des champs de création
  - Association d'un compte avec une marque
